@@ -1,0 +1,4 @@
+ 
+ const elementos = {
+    root: 'html',
+ }
