@@ -21,29 +21,10 @@
  botoesDeAcao.forEach(botao => {
     botao.addEventListener('click', () => {
         const contexto = botao.dataset.contexto;
-        alterarContexto(contexto);
     });
  });
 
- function alterarContexto(contexto) {
+ function alterarOContexto(contexto) {
     html.setAttribute('data-contexto', contexto);
     banner.src = `/imagens/${contexto}.png`;
-    alterarTextoDoTitulo(contexto);
  }
-
- function alterarTextoDoTitulo(contexto) {
-    switch(contexto) {
-        case 'foco':
-            titulo.innerHTML = `Otimize sua produtividade,<br>
-                <strong class="app__title-strong">mergulhe no que importa.</strong>`;
-            break;
-        case 'short':
-            titulo.innerHTML = `Que tal dar uma respirada? <strong class="app__title-strong">Faça uma pausa curta!</strong>`;
-            break;
-        case 'long':
-            titulo.innerHTML = 'Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>';
-            break;
-            default:
-                break;
-    }
- } 

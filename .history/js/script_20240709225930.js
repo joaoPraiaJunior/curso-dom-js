@@ -28,7 +28,7 @@
  function alterarContexto(contexto) {
     html.setAttribute('data-contexto', contexto);
     banner.src = `/imagens/${contexto}.png`;
-    alterarTextoDoTitulo(contexto);
+    alterrTextoDoTitulo(contexto);
  }
 
  function alterarTextoDoTitulo(contexto) {
@@ -43,7 +43,5 @@
         case 'long':
             titulo.innerHTML = 'Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>';
             break;
-            default:
-                break;
     }
  } 

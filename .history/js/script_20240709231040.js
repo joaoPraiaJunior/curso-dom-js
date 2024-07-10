@@ -22,6 +22,7 @@
     botao.addEventListener('click', () => {
         const contexto = botao.dataset.contexto;
         alterarContexto(contexto);
+        console.log(this)
     });
  });
 
@@ -43,7 +44,5 @@
         case 'long':
             titulo.innerHTML = 'Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>';
             break;
-            default:
-                break;
     }
  } 

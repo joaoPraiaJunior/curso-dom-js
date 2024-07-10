@@ -19,9 +19,11 @@
  const duracaoDoDescansoLongo = 900;
 
  botoesDeAcao.forEach(botao => {
+    botao.classList.remove('active');
     botao.addEventListener('click', () => {
         const contexto = botao.dataset.contexto;
         alterarContexto(contexto);
+        botao.classList.add('active');
     });
  });
 
@@ -43,7 +45,5 @@
         case 'long':
             titulo.innerHTML = 'Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>';
             break;
-            default:
-                break;
     }
  } 
