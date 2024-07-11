@@ -60,7 +60,7 @@
 
 
  alternarMusica.addEventListener('change', () => {
-    tocarMusica();
+    
  });
 
  function tocarMusica() {
