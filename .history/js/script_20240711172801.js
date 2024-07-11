@@ -102,11 +102,13 @@
  }
 
  function iniciaOuPausaTemporizador() {
+   playAudio.play();
    if(intervaloDoTemporizador) {
       pauseAudio.play();
       zeraTemporizador();
       return;
    }
-   playAudio.play();
-   intervaloDoTemporizador = setInterval(contagemRegressiva, 1000);
+   intervaloDoTemporizador = setInterval(() => {
+      contagemRegressiva();
+  }, 1000);
  }

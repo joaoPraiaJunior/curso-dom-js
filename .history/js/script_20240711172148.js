@@ -82,7 +82,6 @@
  const contagemRegressiva = () => {
    if(tempoDecorridoEmSegundos <= 0) {
       zeraTemporizador();
-      finalizaTarefaAudio.play();
       alert('Acabou o tempo!');
       tempoDecorridoEmSegundos = 5;
      return;
@@ -103,10 +102,10 @@
 
  function iniciaOuPausaTemporizador() {
    if(intervaloDoTemporizador) {
-      pauseAudio.play();
       zeraTemporizador();
       return;
    }
-   playAudio.play();
-   intervaloDoTemporizador = setInterval(contagemRegressiva, 1000);
+   intervaloDoTemporizador = setInterval(() => {
+      contagemRegressiva();
+  }, 1000);
  }

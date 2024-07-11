@@ -4,8 +4,8 @@
     timer: '#timer',
     banner: '.app__image',
     titulo: '.app__title',
+    botaoIniciar: '.app__card-primary-button',
     botoesDeAcao: '.app__card-button',
-    startPauseTemporizador: '#start-pause',
     alternarMusica: '#alternar-musica',
  }
 
@@ -13,19 +13,13 @@
  const timer = document.querySelector(`${elementos.timer}`);
  const banner = document.querySelector(`${elementos.banner}`);
  const titulo = document.querySelector(`${elementos.titulo}`);
+ const botaoIniciar = document.querySelector(`${elementos.botaoIniciar}`);
  const botoesDeAcao = document.querySelectorAll(`${elementos.botoesDeAcao}`);
- const startPauseTemporizador = document.querySelector(`${elementos.startPauseTemporizador}`);
  const alternarMusica = document.querySelector(`${elementos.alternarMusica}`);
  const musica = new Audio('/sons/luna-rise-part-one.mp3');
- const playAudio = new Audio('/sons/play.wav');
- const pauseAudio = new Audio('/sons/pause.mp3');
- const finalizaTarefaAudio = new Audio('/sons/beep.mp3');
  const duracaoDoFoco = 1500;
  const duracaoDoDescansoCurto = 300;
  const duracaoDoDescansoLongo = 900;
-
- let tempoDecorridoEmSegundos = 5;
- let intervaloDoTemporizador = null;
 
  botoesDeAcao.forEach(botao => {
     botao.addEventListener('click', function () {
@@ -72,41 +66,4 @@
  function tocaMusica() {
     musica.loop = true;
     musica.paused ? musica.play() : musica.pause();
- }
-
-
- startPauseTemporizador.addEventListener('click', () => {
-   iniciarTemporizador();
- })
-
- const contagemRegressiva = () => {
-   if(tempoDecorridoEmSegundos <= 0) {
-      zeraTemporizador();
-      finalizaTarefaAudio.play();
-      alert('Acabou o tempo!');
-      tempoDecorridoEmSegundos = 5;
-     return;
-   }
-
-   tempoDecorridoEmSegundos -= 1;
-   console.log(`Tempo decorrido: ${tempoDecorridoEmSegundos} segundos`);
- }
-
- function iniciarTemporizador() {
-   iniciaOuPausaTemporizador();
- }
-
- function zeraTemporizador() {
-    clearInterval(intervaloDoTemporizador);
-    intervaloDoTemporizador = null;
- }
-
- function iniciaOuPausaTemporizador() {
-   if(intervaloDoTemporizador) {
-      pauseAudio.play();
-      zeraTemporizador();
-      return;
-   }
-   playAudio.play();
-   intervaloDoTemporizador = setInterval(contagemRegressiva, 1000);
  }
