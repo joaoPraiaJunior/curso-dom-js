@@ -17,9 +17,6 @@
  const startPauseTemporizador = document.querySelector(`${elementos.startPauseTemporizador}`);
  const alternarMusica = document.querySelector(`${elementos.alternarMusica}`);
  const musica = new Audio('/sons/luna-rise-part-one.mp3');
- const playAudio = new Audio('/sons/play.wav');
- const pauseAudio = new Audio('/sons/pause.mp3');
- const finalizaTarefaAudio = new Audio('/sons/beep.mp3');
  const duracaoDoFoco = 1500;
  const duracaoDoDescansoCurto = 300;
  const duracaoDoDescansoLongo = 900;
@@ -81,10 +78,7 @@
 
  const contagemRegressiva = () => {
    if(tempoDecorridoEmSegundos <= 0) {
-      zeraTemporizador();
-      finalizaTarefaAudio.play();
       alert('Acabou o tempo!');
-      tempoDecorridoEmSegundos = 5;
      return;
    }
 
@@ -93,20 +87,12 @@
  }
 
  function iniciarTemporizador() {
-   iniciaOuPausaTemporizador();
+   intervaloDoTemporizador = setInterval(() => {
+        contagemRegressiva();
+    }, 1000);
  }
 
- function zeraTemporizador() {
+ function zerarTemporizador() {
     clearInterval(intervaloDoTemporizador);
     intervaloDoTemporizador = null;
- }
-
- function iniciaOuPausaTemporizador() {
-   if(intervaloDoTemporizador) {
-      pauseAudio.play();
-      zeraTemporizador();
-      return;
-   }
-   playAudio.play();
-   intervaloDoTemporizador = setInterval(contagemRegressiva, 1000);
  }

@@ -59,7 +59,7 @@
  }
 
  function alteraFocoDoBotao(botao) {
-    const botaoSetado = document.getElementsByClassName('active');
+    const botaoSetado = document.querySelector('active');
     botaoSetado[0].classList.remove('active');
     botao.classList.add('active');
  }
