@@ -16,7 +16,7 @@
  const botaoIniciar = document.querySelector(`${elementos.botaoIniciar}`);
  const botoesDeAcao = document.querySelectorAll(`${elementos.botoesDeAcao}`);
  const alternarMusica = document.querySelector(`${elementos.alternarMusica}`);
- const musica = new Audio('/sons/luna-rise-part-one.mp3');
+ const musica = new Audio('/sons/beep.mp3');
  const duracaoDoFoco = 1500;
  const duracaoDoDescansoCurto = 300;
  const duracaoDoDescansoLongo = 900;

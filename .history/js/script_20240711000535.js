@@ -59,11 +59,6 @@
  }
 
 
- alternarMusica.addEventListener('change', () => {
-    tocarMusica();
- });
+ alternarMusica.addEventListener('change', function () {
 
- function tocarMusica() {
-    musica.loop = true;
-    musica.paused ? musica.play() : musica.pause();
- }
+ });

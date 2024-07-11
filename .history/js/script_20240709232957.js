@@ -6,7 +6,6 @@
     titulo: '.app__title',
     botaoIniciar: '.app__card-primary-button',
     botoesDeAcao: '.app__card-button',
-    alternarMusica: '#alternar-musica',
  }
 
  const html = document.querySelector(`${elementos.html}`);
@@ -15,8 +14,6 @@
  const titulo = document.querySelector(`${elementos.titulo}`);
  const botaoIniciar = document.querySelector(`${elementos.botaoIniciar}`);
  const botoesDeAcao = document.querySelectorAll(`${elementos.botoesDeAcao}`);
- const alternarMusica = document.querySelector(`${elementos.alternarMusica}`);
- const musica = new Audio('/sons/luna-rise-part-one.mp3');
  const duracaoDoFoco = 1500;
  const duracaoDoDescansoCurto = 300;
  const duracaoDoDescansoLongo = 900;
@@ -24,18 +21,18 @@
  botoesDeAcao.forEach(botao => {
     botao.addEventListener('click', function () {
         const contexto = botao.dataset.contexto;
-        alteraContexto(contexto);
-        alteraFocoDoBotao(botao);
+        alterarContexto(contexto);
+        console.log(this)
     });
  });
 
- function alteraContexto(contexto) {
+ function alterarContexto(contexto) {
     html.setAttribute('data-contexto', contexto);
     banner.src = `/imagens/${contexto}.png`;
-    alteraTextoDoTitulo(contexto);
+    alterarTextoDoTitulo(contexto);
  }
 
- function alteraTextoDoTitulo(contexto) {
+ function alterarTextoDoTitulo(contexto) {
     switch(contexto) {
         case 'foco':
             titulo.innerHTML = `Otimize sua produtividade,<br>
@@ -50,20 +47,4 @@
             default:
                 break;
     }
- }
-
- function alteraFocoDoBotao(botao) {
-    const botaoSetado = document.getElementsByClassName('active');
-    botaoSetado[0].classList.remove('active');
-    botao.classList.add('active');
- }
-
-
- alternarMusica.addEventListener('change', () => {
-    tocarMusica();
- });
-
- function tocarMusica() {
-    musica.loop = true;
-    musica.paused ? musica.play() : musica.pause();
- }
+ } 
