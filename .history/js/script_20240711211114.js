@@ -27,7 +27,7 @@
  const duracaoDoDescansoCurto = 300;
  const duracaoDoDescansoLongo = 900;
 
- let tempoDecorridoEmSegundos = duracaoDoFoco;
+ let tempoDecorridoEmSegundos = 1500;
  let intervaloDoTemporizador = null;
 
  botoesDeAcao.forEach(botao => {
@@ -42,7 +42,6 @@
     html.setAttribute('data-contexto', contexto);
     banner.src = `/imagens/${contexto}.png`;
     alteraTextoDoTitulo(contexto);
-    alteraTempo(contexto);
  }
 
  function alteraTextoDoTitulo(contexto) {
@@ -57,6 +56,8 @@
         case 'long':
             titulo.innerHTML = 'Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>';
             break;
+            default:
+                break;
     }
  }
 
@@ -86,6 +87,7 @@
       finalizaTarefaAudio.play();
       alert('Acabou o tempo!');
       zeraTemporizador();
+      tempoDecorridoEmSegundos = 5;
      return;
    }
 
@@ -119,26 +121,8 @@
  }
 
  function mostraTempo() {
-   const tempo = new Date(tempoDecorridoEmSegundos * 1000);
-   const tempoFormatado = tempo.toLocaleTimeString('pt-BR', {minute: '2-digit', second: '2-digit'});
-   timer.innerHTML = `${tempoFormatado}`;
+   const tempo = tempoDecorridoEmSegundos;
+   timer.innerHTML = `${tempo}`;
  }
 
-
- function alteraTempo(contexto) {
-   switch(contexto) {
-      case 'foco':
-         tempoDecorridoEmSegundos = duracaoDoFoco;
-         break;
-      case 'short':
-         tempoDecorridoEmSegundos = duracaoDoDescansoCurto;
-         break;
-      case 'long':
-         tempoDecorridoEmSegundos = duracaoDoDescansoLongo;
-         break;
-   }
-
-   mostraTempo();
- }
-
- mostraTempo();
+ mostrarTempo();
