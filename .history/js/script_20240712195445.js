@@ -49,7 +49,7 @@ function alteraTextoDoTitulo(contexto) {
    switch (contexto) {
       case 'foco':
          titulo.innerHTML = `Otimize sua produtividade,<br>
-               <strong class="app__title-strong">mergulhe no que importa.</strong>`;
+                <strong class="app__title-strong">mergulhe no que importa.</strong>`;
          break;
       case 'short':
          titulo.innerHTML = `Que tal dar uma respirada? <strong class="app__title-strong">Faça uma pausa curta!</strong>`;
