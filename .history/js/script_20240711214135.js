@@ -64,6 +64,7 @@
     const botaoSetado = document.getElementsByClassName('active');
     botaoSetado[0].classList.remove('active');
     botao.classList.add('active');
+    iniciaOuPausaTemporizador();
  }
 
 

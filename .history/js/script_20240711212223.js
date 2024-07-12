@@ -57,6 +57,8 @@
         case 'long':
             titulo.innerHTML = 'Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>';
             break;
+            default:
+                break;
     }
  }
 
@@ -86,6 +88,7 @@
       finalizaTarefaAudio.play();
       alert('Acabou o tempo!');
       zeraTemporizador();
+      tempoDecorridoEmSegundos = 5;
      return;
    }
 
@@ -124,6 +127,7 @@
    timer.innerHTML = `${tempoFormatado}`;
  }
 
+ mostraTempo();
 
  function alteraTempo(contexto) {
    switch(contexto) {
@@ -136,9 +140,7 @@
       case 'long':
          tempoDecorridoEmSegundos = duracaoDoDescansoLongo;
          break;
+         default:
+            break;
    }
-
-   mostraTempo();
  }
-
- mostraTempo();

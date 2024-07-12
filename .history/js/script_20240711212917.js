@@ -86,6 +86,7 @@
       finalizaTarefaAudio.play();
       alert('Acabou o tempo!');
       zeraTemporizador();
+      tempoDecorridoEmSegundos = 5;
      return;
    }
 
