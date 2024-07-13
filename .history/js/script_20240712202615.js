@@ -3,22 +3,22 @@ const elementos = {
    html: 'html',
    timer: '#timer',
    banner: '.app__image',
-   tituloPrincipal: '.app__title',
+   titulo: '.app__title',
    botoesDeAcaoDoMenu: '.app__card-button',
    botaoDePlayPause: '#start-pause',
    playerDaMusicaDeFundo: '#alternar-musica',
-   iconePlayPause: '.app__card-primary-butto-icon',
+   iconeStartPause: '.app__card-primary-butto-icon',
 }
 
 const html = document.querySelector(`${elementos.html}`);
 const timer = document.querySelector(`${elementos.timer}`);
 const banner = document.querySelector(`${elementos.banner}`);
-const tituloPrincipal = document.querySelector(`${elementos.tituloPrincipal}`);
+const titulo = document.querySelector(`${elementos.titulo}`);
 const botoesDeAcaoDoMenu = document.querySelectorAll(`${elementos.botoesDeAcaoDoMenu}`);
-const botaoDePlayPause = document.querySelector(`${elementos.botaoDePlayPause}`);
-const textoDoBotaoPlayPause = botaoDePlayPause.querySelector('span');
+const  botaoDePlayPause = document.querySelector(`${elementos. botaoDePlayPause}`);
+const textoDoBotaoPlayPause=  botaoDePlayPause.querySelector('span');
 const playerDaMusicaDeFundo = document.querySelector(`${elementos.playerDaMusicaDeFundo}`);
-const iconePlayPause = document.querySelector(`${elementos.iconePlayPause}`);
+const iconeStartPause = document.querySelector(`${elementos.iconeStartPause}`);
 const musica = new Audio('./sons/luna-rise-part-one.mp3');
 const playAudio = new Audio('./sons/play.wav');
 const pauseAudio = new Audio('./sons/pause.mp3');
@@ -41,21 +41,21 @@ botoesDeAcaoDoMenu.forEach(botao => {
 function alteraContexto(contexto) {
    html.setAttribute('data-contexto', contexto);
    banner.src = `./imagens/${contexto}.png`;
-   alteraTextoDoTituloPrincipal(contexto);
+   alteraTextoDoTitulo(contexto);
    alteraTempo(contexto);
 }
 
-function alteraTextoDoTituloPrincipal(contexto) {
+function alteraTextoDoTitulo(contexto) {
    switch (contexto) {
       case 'foco':
-         tituloPrincipal.innerHTML = `Otimize sua produtividade,<br>
+         titulo.innerHTML = `Otimize sua produtividade,<br>
                <strong class="app__title-strong">mergulhe no que importa.</strong>`;
          break;
       case 'descanso-curto':
-         tituloPrincipal.innerHTML = `Que tal dar uma respirada? <strong class="app__title-strong">Faça uma pausa curta!</strong>`;
+         titulo.innerHTML = `Que tal dar uma respirada? <strong class="app__title-strong">Faça uma pausa curta!</strong>`;
          break;
       case 'descanso-longo':
-         tituloPrincipal.innerHTML = 'Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>';
+         titulo.innerHTML = 'Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>';
          break;
    }
 }
@@ -75,15 +75,15 @@ function tocaMusica() {
    musica.paused ? musica.play() : musica.pause();
 }
 
-botaoDePlayPause.addEventListener('click', () => {
-   iniciaOuPausaTemporizador();
+ botaoDePlayPause.addEventListener('click', () => {
+   iniciarTemporizador();
 });
 
 const contagemRegressiva = () => {
    if (tempoDecorridoEmSegundos <= 0) {
       finalizaTarefaAudio.play();
       alert('Acabou o tempo!');
-      limpaIntervaloDoTemporizador();
+      zeraTemporizador();
       return;
    }
 
@@ -91,10 +91,14 @@ const contagemRegressiva = () => {
    mostraTempo();
 }
 
-function limpaIntervaloDoTemporizador() {
+function iniciarTemporizador() {
+   iniciaOuPausaTemporizador();
+}
+
+function zeraTemporizador() {
    clearInterval(intervaloDoTemporizador);
    textoDoBotaoPlayPause.textContent = 'Começar';
-   iconePlayPause.src = './imagens/play_arrow.png';
+   iconeStartPause.src = './imagens/play_arrow.png';
    botaoDePlayPause.setAttribute('aria-pressed', 'false');
    intervaloDoTemporizador = null;
 }
@@ -102,13 +106,13 @@ function limpaIntervaloDoTemporizador() {
 function iniciaOuPausaTemporizador() {
    if (intervaloDoTemporizador) {
       pauseAudio.play();
-      limpaIntervaloDoTemporizador();
+      zeraTemporizador();
       return;
    }
    playAudio.play();
    intervaloDoTemporizador = setInterval(contagemRegressiva, 1000);
    textoDoBotaoPlayPause.textContent = 'Pausar';
-   iconePlayPause.src = './imagens/pause.png';
+   iconeStartPause.src = './imagens/pause.png';
    botaoDePlayPause.setAttribute('aria-pressed', 'true');
 }
 

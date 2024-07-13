@@ -3,22 +3,22 @@ const elementos = {
    html: 'html',
    timer: '#timer',
    banner: '.app__image',
-   tituloPrincipal: '.app__title',
-   botoesDeAcaoDoMenu: '.app__card-button',
-   botaoDePlayPause: '#start-pause',
-   playerDaMusicaDeFundo: '#alternar-musica',
-   iconePlayPause: '.app__card-primary-butto-icon',
+   titulo: '.app__title',
+   botoesDeAcao: '.app__card-button',
+   startPauseBotao: '#start-pause',
+   alternarMusica: '#alternar-musica',
+   iconeStartPause: '.app__card-primary-butto-icon',
 }
 
 const html = document.querySelector(`${elementos.html}`);
 const timer = document.querySelector(`${elementos.timer}`);
 const banner = document.querySelector(`${elementos.banner}`);
-const tituloPrincipal = document.querySelector(`${elementos.tituloPrincipal}`);
-const botoesDeAcaoDoMenu = document.querySelectorAll(`${elementos.botoesDeAcaoDoMenu}`);
-const botaoDePlayPause = document.querySelector(`${elementos.botaoDePlayPause}`);
-const textoDoBotaoPlayPause = botaoDePlayPause.querySelector('span');
-const playerDaMusicaDeFundo = document.querySelector(`${elementos.playerDaMusicaDeFundo}`);
-const iconePlayPause = document.querySelector(`${elementos.iconePlayPause}`);
+const titulo = document.querySelector(`${elementos.titulo}`);
+const botoesDeAcao = document.querySelectorAll(`${elementos.botoesDeAcao}`);
+const startPauseBotao = document.querySelector(`${elementos.startPauseBotao}`);
+const textoDoBotaoStartPause = startPauseBotao.querySelector('span');
+const alternarMusica = document.querySelector(`${elementos.alternarMusica}`);
+const iconeStartPause = document.querySelector(`${elementos.iconeStartPause}`);
 const musica = new Audio('./sons/luna-rise-part-one.mp3');
 const playAudio = new Audio('./sons/play.wav');
 const pauseAudio = new Audio('./sons/pause.mp3');
@@ -30,7 +30,7 @@ const duracaoDoDescansoLongo = 900;
 let tempoDecorridoEmSegundos = duracaoDoFoco;
 let intervaloDoTemporizador = null;
 
-botoesDeAcaoDoMenu.forEach(botao => {
+botoesDeAcao.forEach(botao => {
    botao.addEventListener('click', function () {
       const contexto = botao.dataset.contexto;
       alteraContexto(contexto);
@@ -41,21 +41,21 @@ botoesDeAcaoDoMenu.forEach(botao => {
 function alteraContexto(contexto) {
    html.setAttribute('data-contexto', contexto);
    banner.src = `./imagens/${contexto}.png`;
-   alteraTextoDoTituloPrincipal(contexto);
+   alteraTextoDoTitulo(contexto);
    alteraTempo(contexto);
 }
 
-function alteraTextoDoTituloPrincipal(contexto) {
+function alteraTextoDoTitulo(contexto) {
    switch (contexto) {
       case 'foco':
-         tituloPrincipal.innerHTML = `Otimize sua produtividade,<br>
+         titulo.innerHTML = `Otimize sua produtividade,<br>
                <strong class="app__title-strong">mergulhe no que importa.</strong>`;
          break;
       case 'descanso-curto':
-         tituloPrincipal.innerHTML = `Que tal dar uma respirada? <strong class="app__title-strong">Faça uma pausa curta!</strong>`;
+         titulo.innerHTML = `Que tal dar uma respirada? <strong class="app__title-strong">Faça uma pausa curta!</strong>`;
          break;
       case 'descanso-longo':
-         tituloPrincipal.innerHTML = 'Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>';
+         titulo.innerHTML = 'Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>';
          break;
    }
 }
@@ -66,7 +66,8 @@ function alteraFocoDoBotao(botao) {
    botao.classList.add('active');
 }
 
-playerDaMusicaDeFundo.addEventListener('change', () => {
+
+alternarMusica.addEventListener('change', () => {
    tocaMusica();
 });
 
@@ -75,15 +76,16 @@ function tocaMusica() {
    musica.paused ? musica.play() : musica.pause();
 }
 
-botaoDePlayPause.addEventListener('click', () => {
-   iniciaOuPausaTemporizador();
-});
+
+startPauseBotao.addEventListener('click', () => {
+   iniciarTemporizador();
+})
 
 const contagemRegressiva = () => {
    if (tempoDecorridoEmSegundos <= 0) {
       finalizaTarefaAudio.play();
       alert('Acabou o tempo!');
-      limpaIntervaloDoTemporizador();
+      zeraTemporizador();
       return;
    }
 
@@ -91,25 +93,29 @@ const contagemRegressiva = () => {
    mostraTempo();
 }
 
-function limpaIntervaloDoTemporizador() {
+function iniciarTemporizador() {
+   iniciaOuPausaTemporizador();
+}
+
+function zeraTemporizador() {
    clearInterval(intervaloDoTemporizador);
-   textoDoBotaoPlayPause.textContent = 'Começar';
-   iconePlayPause.src = './imagens/play_arrow.png';
-   botaoDePlayPause.setAttribute('aria-pressed', 'false');
+   textoDoBotaoStartPause.textContent = 'Começar';
+   iconeStartPause.src = './imagens/play_arrow.png';
+   startPauseBotao.setAttribute('aria-pressed', 'false');
    intervaloDoTemporizador = null;
 }
 
 function iniciaOuPausaTemporizador() {
    if (intervaloDoTemporizador) {
       pauseAudio.play();
-      limpaIntervaloDoTemporizador();
+      zeraTemporizador();
       return;
    }
    playAudio.play();
    intervaloDoTemporizador = setInterval(contagemRegressiva, 1000);
-   textoDoBotaoPlayPause.textContent = 'Pausar';
-   iconePlayPause.src = './imagens/pause.png';
-   botaoDePlayPause.setAttribute('aria-pressed', 'true');
+   textoDoBotaoStartPause.textContent = 'Pausar';
+   iconeStartPause.src = './imagens/pause.png';
+   startPauseBotao.setAttribute('aria-pressed', 'true');
 }
 
 function mostraTempo() {
@@ -117,6 +123,7 @@ function mostraTempo() {
    const tempoFormatado = tempo.toLocaleTimeString('pt-BR', { minute: '2-digit', second: '2-digit' });
    timer.textContent = `${tempoFormatado}`;
 }
+
 
 function alteraTempo(contexto) {
    switch (contexto) {

@@ -3,7 +3,7 @@ const elementos = {
    html: 'html',
    timer: '#timer',
    banner: '.app__image',
-   tituloPrincipal: '.app__title',
+   titulo: '.app__title',
    botoesDeAcaoDoMenu: '.app__card-button',
    botaoDePlayPause: '#start-pause',
    playerDaMusicaDeFundo: '#alternar-musica',
@@ -13,7 +13,7 @@ const elementos = {
 const html = document.querySelector(`${elementos.html}`);
 const timer = document.querySelector(`${elementos.timer}`);
 const banner = document.querySelector(`${elementos.banner}`);
-const tituloPrincipal = document.querySelector(`${elementos.tituloPrincipal}`);
+const titulo = document.querySelector(`${elementos.titulo}`);
 const botoesDeAcaoDoMenu = document.querySelectorAll(`${elementos.botoesDeAcaoDoMenu}`);
 const botaoDePlayPause = document.querySelector(`${elementos.botaoDePlayPause}`);
 const textoDoBotaoPlayPause = botaoDePlayPause.querySelector('span');
@@ -41,27 +41,27 @@ botoesDeAcaoDoMenu.forEach(botao => {
 function alteraContexto(contexto) {
    html.setAttribute('data-contexto', contexto);
    banner.src = `./imagens/${contexto}.png`;
-   alteraTextoDoTituloPrincipal(contexto);
+   alteraTextoDoTitulo(contexto);
    alteraTempo(contexto);
 }
 
-function alteraTextoDoTituloPrincipal(contexto) {
+function alteraTextoDoTitulo(contexto) {
    switch (contexto) {
       case 'foco':
-         tituloPrincipal.innerHTML = `Otimize sua produtividade,<br>
+         titulo.innerHTML = `Otimize sua produtividade,<br>
                <strong class="app__title-strong">mergulhe no que importa.</strong>`;
          break;
       case 'descanso-curto':
-         tituloPrincipal.innerHTML = `Que tal dar uma respirada? <strong class="app__title-strong">Faça uma pausa curta!</strong>`;
+         titulo.innerHTML = `Que tal dar uma respirada? <strong class="app__title-strong">Faça uma pausa curta!</strong>`;
          break;
       case 'descanso-longo':
-         tituloPrincipal.innerHTML = 'Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>';
+         titulo.innerHTML = 'Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>';
          break;
    }
 }
-
+const botaoSetado = document.getElementsByClassName('active');
 function alteraFocoDoBotao(botao) {
-   const botaoSetado = document.getElementsByClassName('active');
+
    botaoSetado[0].classList.remove('active');
    botao.classList.add('active');
 }
@@ -76,14 +76,14 @@ function tocaMusica() {
 }
 
 botaoDePlayPause.addEventListener('click', () => {
-   iniciaOuPausaTemporizador();
+   iniciarTemporizador();
 });
 
 const contagemRegressiva = () => {
    if (tempoDecorridoEmSegundos <= 0) {
       finalizaTarefaAudio.play();
       alert('Acabou o tempo!');
-      limpaIntervaloDoTemporizador();
+      zeraTemporizador();
       return;
    }
 
@@ -91,7 +91,11 @@ const contagemRegressiva = () => {
    mostraTempo();
 }
 
-function limpaIntervaloDoTemporizador() {
+function iniciarTemporizador() {
+   iniciaOuPausaTemporizador();
+}
+
+function zeraTemporizador() {
    clearInterval(intervaloDoTemporizador);
    textoDoBotaoPlayPause.textContent = 'Começar';
    iconePlayPause.src = './imagens/play_arrow.png';
@@ -102,7 +106,7 @@ function limpaIntervaloDoTemporizador() {
 function iniciaOuPausaTemporizador() {
    if (intervaloDoTemporizador) {
       pauseAudio.play();
-      limpaIntervaloDoTemporizador();
+      zeraTemporizador();
       return;
    }
    playAudio.play();

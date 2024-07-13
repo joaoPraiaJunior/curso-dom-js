@@ -25,7 +25,7 @@ const pauseAudio = new Audio('./sons/pause.mp3');
 const finalizaTarefaAudio = new Audio('./sons/beep.mp3');
 const duracaoDoFoco = 1500;
 const duracaoDoDescansoCurto = 300;
-const duracaoDoDescansoLongo = 900;
+const duracaoDoDescansoLongo = 5;
 
 let tempoDecorridoEmSegundos = duracaoDoFoco;
 let intervaloDoTemporizador = null;
@@ -41,11 +41,11 @@ botoesDeAcaoDoMenu.forEach(botao => {
 function alteraContexto(contexto) {
    html.setAttribute('data-contexto', contexto);
    banner.src = `./imagens/${contexto}.png`;
-   alteraTextoDoTituloPrincipal(contexto);
+   alteraTextoDotituloPrincipal(contexto);
    alteraTempo(contexto);
 }
 
-function alteraTextoDoTituloPrincipal(contexto) {
+function alteraTextoDotituloPrincipal(contexto) {
    switch (contexto) {
       case 'foco':
          tituloPrincipal.innerHTML = `Otimize sua produtividade,<br>

@@ -41,11 +41,11 @@ botoesDeAcaoDoMenu.forEach(botao => {
 function alteraContexto(contexto) {
    html.setAttribute('data-contexto', contexto);
    banner.src = `./imagens/${contexto}.png`;
-   alteraTextoDoTituloPrincipal(contexto);
+   alteraTextoDotituloPrincipal(contexto);
    alteraTempo(contexto);
 }
 
-function alteraTextoDoTituloPrincipal(contexto) {
+function alteraTextoDotituloPrincipal(contexto) {
    switch (contexto) {
       case 'foco':
          tituloPrincipal.innerHTML = `Otimize sua produtividade,<br>
@@ -83,7 +83,7 @@ const contagemRegressiva = () => {
    if (tempoDecorridoEmSegundos <= 0) {
       finalizaTarefaAudio.play();
       alert('Acabou o tempo!');
-      limpaIntervaloDoTemporizador();
+      zeraTemporizador();
       return;
    }
 
@@ -91,7 +91,7 @@ const contagemRegressiva = () => {
    mostraTempo();
 }
 
-function limpaIntervaloDoTemporizador() {
+function zeraTemporizador() {
    clearInterval(intervaloDoTemporizador);
    textoDoBotaoPlayPause.textContent = 'Começar';
    iconePlayPause.src = './imagens/play_arrow.png';
@@ -102,7 +102,7 @@ function limpaIntervaloDoTemporizador() {
 function iniciaOuPausaTemporizador() {
    if (intervaloDoTemporizador) {
       pauseAudio.play();
-      limpaIntervaloDoTemporizador();
+      zeraTemporizador();
       return;
    }
    playAudio.play();
