@@ -6,7 +6,7 @@ const elementos = {
    tituloPrincipal: '.app__title',
    botoesDeAcaoDoMenu: '.app__card-button',
    botaoDePlayPause: '#start-pause',
-   playerDaMusicaDeFundo: '#alternar-musica',
+   playerDaMusicaDeFundo: '#alternar-musicadefundo',
    iconePlayPause: '.app__card-primary-butto-icon',
 }
 
@@ -19,7 +19,7 @@ const botaoDePlayPause = document.querySelector(`${elementos.botaoDePlayPause}`)
 const textoDoBotaoPlayPause = botaoDePlayPause.querySelector('span');
 const playerDaMusicaDeFundo = document.querySelector(`${elementos.playerDaMusicaDeFundo}`);
 const iconePlayPause = document.querySelector(`${elementos.iconePlayPause}`);
-const musicaDeFundo = new Audio('./sons/luna-rise-part-one.mp3');
+const musicadefundo = new Audio('./sons/luna-rise-part-one.mp3');
 const audioDePlay = new Audio('./sons/play.wav');
 const audioDePause = new Audio('./sons/pause.mp3');
 const audioDeFinalizacaoDeTarefa = new Audio('./sons/beep.mp3');
@@ -71,8 +71,8 @@ playerDaMusicaDeFundo.addEventListener('change', () => {
 });
 
 function tocaMusica() {
-   musicaDeFundo.loop = true;
-   musicaDeFundo.paused ? musicaDeFundo.play() : musicaDeFundo.pause();
+   musicadefundo.loop = true;
+   musicadefundo.paused ? musicadefundo.play() : musicadefundo.pause();
 }
 
 botaoDePlayPause.addEventListener('click', () => {

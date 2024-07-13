@@ -6,7 +6,7 @@ const elementos = {
    tituloPrincipal: '.app__title',
    botoesDeAcaoDoMenu: '.app__card-button',
    botaoDePlayPause: '#start-pause',
-   playerDaMusicaDeFundo: '#alternar-musica',
+   playerDaMusicaDeFundo: '#alternar-musicaDeFundo',
    iconePlayPause: '.app__card-primary-butto-icon',
 }
 

@@ -88,7 +88,7 @@ const contagemRegressiva = () => {
    }
 
    tempoDecorridoEmSegundos -= 1;
-   mostraTempo();
+
 }
 
 function limpaIntervaloDoTemporizador() {
