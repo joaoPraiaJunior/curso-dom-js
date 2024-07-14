@@ -1,8 +1,5 @@
 
 (function() {
-
-   'use strict';
-   
    const elementos = {
       html: 'html',
       timer: '#timer',
