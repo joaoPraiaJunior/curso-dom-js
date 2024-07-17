@@ -82,8 +82,8 @@
             if (descricaoEditada !== null && descricaoEditada.trim() !== '') {
                 paragrafo.textContent = descricaoEditada;
                 tarefa.descricao = descricaoEditada;
-                atualizaTarefasNoLocalStorage();
                 alert("Tarefa atualizada com sucesso!");
+                atualizaTarefasNoLocalStorage();
             } else {
                 alert("A descrição da tarefa não pode ser vazia!");
             }
