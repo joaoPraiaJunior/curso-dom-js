@@ -78,21 +78,14 @@
 
     function atualizaTarefa(botao, paragrafo, tarefa) {
         botao.onclick = () => {
-            const descricaoEditada = prompt('Digite a nova descrição da tarefa');
-            if (descricaoEditada !== null && descricaoEditada.trim() !== '') {
-                paragrafo.textContent = descricaoEditada;
-                tarefa.descricao = descricaoEditada;
-                atualizaTarefasNoLocalStorage();
-                alert("Tarefa atualizada com sucesso!");
-            } else {
-                alert("A descrição da tarefa não pode ser vazia!");
-            }
+            const novaDescricao = prompt('Digite a nova descrição da tarefa');
+            if (!novaDescricao) return;
+            paragrafo.textContent = novaDescricao
+            tarefa.descricao = novaDescricao;
+            atualizaTarefasNoLocalStorage();
         }
     }
 
-    botaoCancelar.addEventListener('click', () => {
-        formularioDeAdicaoDeTarefa.classList.add('hidden');
-        areaDeTexto.value = '';
-    });
+
 
 })();

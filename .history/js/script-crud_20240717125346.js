@@ -7,14 +7,12 @@
         formularioDeAdicaoDeTarefa: '[data-js="formulario-add-tarefa"]',
         areaDeTexto: '[data-js="area-de-texto"]',
         listaDeTarefas: '[data-js="lista-tarefas"]',
-        botaoCancelar: '[data-js="botao-cancelar"]',
     }
 
     const botaoDeAdicionarTarefa = document.querySelector(`${elementos.botaoDeAdicionarTarefa}`);
     const formularioDeAdicaoDeTarefa = document.querySelector(`${elementos.formularioDeAdicaoDeTarefa}`);
     const areaDeTexto = document.querySelector(`${elementos.areaDeTexto}`);
     const listaDeTarefas = document.querySelector(`${elementos.listaDeTarefas}`);
-    const botaoCancelar = document.querySelector(`${elementos.botaoCancelar}`);
     const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
 
     function atualizaTarefasNoLocalStorage() {
@@ -78,21 +76,12 @@
 
     function atualizaTarefa(botao, paragrafo, tarefa) {
         botao.onclick = () => {
-            const descricaoEditada = prompt('Digite a nova descrição da tarefa');
-            if (descricaoEditada !== null && descricaoEditada.trim() !== '') {
-                paragrafo.textContent = descricaoEditada;
-                tarefa.descricao = descricaoEditada;
-                atualizaTarefasNoLocalStorage();
-                alert("Tarefa atualizada com sucesso!");
-            } else {
-                alert("A descrição da tarefa não pode ser vazia!");
-            }
+            const novaDescricao = prompt('Digite a nova descrição da tarefa');
+            if (!novaDescricao) return;
+            paragrafo.textContent = novaDescricao
+            tarefa.descricao = novaDescricao;
+            atualizaTarefasNoLocalStorage();
         }
     }
-
-    botaoCancelar.addEventListener('click', () => {
-        formularioDeAdicaoDeTarefa.classList.add('hidden');
-        areaDeTexto.value = '';
-    });
 
 })();

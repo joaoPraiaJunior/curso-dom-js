@@ -83,9 +83,6 @@
                 paragrafo.textContent = descricaoEditada;
                 tarefa.descricao = descricaoEditada;
                 atualizaTarefasNoLocalStorage();
-                alert("Tarefa atualizada com sucesso!");
-            } else {
-                alert("A descrição da tarefa não pode ser vazia!");
             }
         }
     }
