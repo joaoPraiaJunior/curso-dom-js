@@ -87,7 +87,7 @@
       if (tempoDecorridoEmSegundos <= 0) {
          audioDeFinalizacaoDeTarefa.play();
          alert('Acabou o tempo!');
-         despachaEventoDeConclusao();
+         
          limpaIntervaloDoTemporizador();
          return;
       }
@@ -137,14 +137,6 @@
       }
    
       mostraTempo();
-   }
-
-   function despachaEventoDeConclusao() {
-      const focoAtivo = html.dataset.contexto === 'foco';
-      if(focoAtivo) {
-         const evento = new CustomEvent('FocoConcluido');
-         document.dispatchEvent(evento);
-      } 
    }
    
    mostraTempo();

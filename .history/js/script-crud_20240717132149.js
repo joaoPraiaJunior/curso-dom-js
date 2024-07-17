@@ -16,11 +16,7 @@
     const areaDeTexto = document.querySelector(`${elementos.areaDeTexto}`);
     const listaDeTarefas = document.querySelector(`${elementos.listaDeTarefas}`);
     const botaoCancelar = document.querySelector(`${elementos.botaoCancelar}`);
-    const taskEmAndamnento = document.querySelector(`${elementos.taskEmAndamnento}`);
-
     const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
-    let tarefaSelecionada = null;
-    let liDaTarefaSelecionada = null;
 
     function atualizaTarefasNoLocalStorage() {
         localStorage.setItem('tarefas', JSON.stringify(tarefas))
@@ -39,11 +35,6 @@
         }
 
         salvaTarefa(tarefa);
-    });
-
-    botaoCancelar.addEventListener('click', () => {
-        formularioDeAdicaoDeTarefa.classList.add('hidden');
-        areaDeTexto.value = '';
     });
 
     function salvaTarefa(tarefa) {
@@ -77,7 +68,6 @@
         li.append(svg, paragrafo, botao);
 
         atualizaTarefa(botao, paragrafo, tarefa);
-        selecionaTarefa(li, tarefa);
 
         return li
     }
@@ -101,33 +91,9 @@
         }
     }
 
-    function selecionaTarefa(li, tarefa) {
-        li.onclick = () => {
-            document.querySelectorAll('.app__section-task-list-item-active')
-            .forEach(elemento => {
-                elemento.classList.remove('app__section-task-list-item-active');
-            });
-
-            if(tarefaSelecionada === tarefa) {
-                tarefaSelecionada = null;
-                liDaTarefaSelecionada = null;
-                taskEmAndamnento.textContent = '';
-                return;
-            }
-            tarefaSelecionada = tarefa;
-            liDaTarefaSelecionada = li;
-            taskEmAndamnento.textContent = tarefa.descricao;
-            li.classList.add('app__section-task-list-item-active');
-        }
-    }
-
-    document.addEventListener('FocoConcluido', () => {
-        if(tarefaSelecionada && liDaTarefaSelecionada) {
-            liDaTarefaSelecionada.classList.remove('app__section-task-list-item-active');
-            liDaTarefaSelecionada.classList.add('app__section-task-list-item-complete');
-            liDaTarefaSelecionada.querySelector('button').setAttribute('disabled', 'true');
-        }
+    botaoCancelar.addEventListener('click', () => {
+        formularioDeAdicaoDeTarefa.classList.add('hidden');
+        areaDeTexto.value = '';
     });
-
 
 })();

@@ -20,7 +20,6 @@
 
     const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
     let tarefaSelecionada = null;
-    let liDaTarefaSelecionada = null;
 
     function atualizaTarefasNoLocalStorage() {
         localStorage.setItem('tarefas', JSON.stringify(tarefas))
@@ -110,24 +109,14 @@
 
             if(tarefaSelecionada === tarefa) {
                 tarefaSelecionada = null;
-                liDaTarefaSelecionada = null;
                 taskEmAndamnento.textContent = '';
                 return;
             }
             tarefaSelecionada = tarefa;
-            liDaTarefaSelecionada = li;
             taskEmAndamnento.textContent = tarefa.descricao;
             li.classList.add('app__section-task-list-item-active');
         }
     }
-
-    document.addEventListener('FocoConcluido', () => {
-        if(tarefaSelecionada && liDaTarefaSelecionada) {
-            liDaTarefaSelecionada.classList.remove('app__section-task-list-item-active');
-            liDaTarefaSelecionada.classList.add('app__section-task-list-item-complete');
-            liDaTarefaSelecionada.querySelector('button').setAttribute('disabled', 'true');
-        }
-    });
 
 
 })();
