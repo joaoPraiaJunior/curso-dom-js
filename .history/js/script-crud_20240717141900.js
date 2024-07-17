@@ -110,7 +110,6 @@
 
             if(tarefaSelecionada === tarefa) {
                 tarefaSelecionada = null;
-                liDaTarefaSelecionada = null;
                 taskEmAndamnento.textContent = '';
                 return;
             }
@@ -122,11 +121,7 @@
     }
 
     document.addEventListener('FocoConcluido', () => {
-        if(tarefaSelecionada && liDaTarefaSelecionada) {
-            liDaTarefaSelecionada.classList.remove('app__section-task-list-item-active');
-            liDaTarefaSelecionada.classList.add('app__section-task-list-item-complete');
-            liDaTarefaSelecionada.querySelector('button').setAttribute('disabled', 'true');
-        }
+
     });
 
 

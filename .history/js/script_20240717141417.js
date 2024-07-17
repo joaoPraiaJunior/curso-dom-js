@@ -144,7 +144,8 @@
       if(focoAtivo) {
          const evento = new CustomEvent('FocoConcluido');
          document.dispatchEvent(evento);
-      } 
+      }
+      
    }
    
    mostraTempo();
