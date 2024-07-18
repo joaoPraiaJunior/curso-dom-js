@@ -89,7 +89,6 @@
          alert('Acabou o tempo!');
          despachaEventoDeConclusao();
          limpaIntervaloDoTemporizador();
-         alteraTempo(html.dataset.contexto);
          return;
       }
    

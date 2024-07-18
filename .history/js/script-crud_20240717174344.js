@@ -19,7 +19,6 @@
     const areaDeTexto = document.querySelector(`${elementos.areaDeTexto}`);
     const listaDeTarefas = document.querySelector(`${elementos.listaDeTarefas}`);
     const botaoCancelar = document.querySelector(`${elementos.botaoCancelar}`);
-    const botaoDeletar = document.querySelector(`${elementos.botaoDeletar}`);
     const taskEmAndamnento = document.querySelector(`${elementos.taskEmAndamnento}`);
     const botaoRemoverTasksConcluidas = document.querySelector(`${elementos.botaoRemoverTasksConcluidas}`);
     const botaoRemoverTodasTasks = document.querySelector(`${elementos.botaoRemoverTodasTasks}`);
@@ -49,10 +48,6 @@
 
     botaoCancelar.addEventListener('click', () => {
         formularioDeAdicaoDeTarefa.classList.add('hidden');
-        areaDeTexto.value = '';
-    });
-
-    botaoDeletar.addEventListener('click', () => {
         areaDeTexto.value = '';
     });
 

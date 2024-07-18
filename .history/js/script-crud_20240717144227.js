@@ -8,10 +8,7 @@
         areaDeTexto: '[data-js="area-de-texto"]',
         listaDeTarefas: '[data-js="lista-tarefas"]',
         botaoCancelar: '[data-js="botao-cancelar"]',
-        botaoDeletar: '[data-js="botao-deletar"]',
         taskEmAndamnento: '[data-js="task-andamento"]',
-        botaoRemoverTasksConcluidas: '[data-js="remover-tasks-concluidas"]',
-        botaoRemoverTodasTasks: '[data-js="remover-todas-tasks"]',
     }
 
     const botaoDeAdicionarTarefa = document.querySelector(`${elementos.botaoDeAdicionarTarefa}`);
@@ -19,12 +16,9 @@
     const areaDeTexto = document.querySelector(`${elementos.areaDeTexto}`);
     const listaDeTarefas = document.querySelector(`${elementos.listaDeTarefas}`);
     const botaoCancelar = document.querySelector(`${elementos.botaoCancelar}`);
-    const botaoDeletar = document.querySelector(`${elementos.botaoDeletar}`);
     const taskEmAndamnento = document.querySelector(`${elementos.taskEmAndamnento}`);
-    const botaoRemoverTasksConcluidas = document.querySelector(`${elementos.botaoRemoverTasksConcluidas}`);
-    const botaoRemoverTodasTasks = document.querySelector(`${elementos.botaoRemoverTodasTasks}`);
 
-    let tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+    const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
     let tarefaSelecionada = null;
     let liDaTarefaSelecionada = null;
 
@@ -49,10 +43,6 @@
 
     botaoCancelar.addEventListener('click', () => {
         formularioDeAdicaoDeTarefa.classList.add('hidden');
-        areaDeTexto.value = '';
-    });
-
-    botaoDeletar.addEventListener('click', () => {
         areaDeTexto.value = '';
     });
 
@@ -114,27 +104,22 @@
     }
 
     function selecionaTarefa(li, tarefa) {
-        if(tarefa.completa) {
-            li.classList.add('app__section-task-list-item-complete');
-            li.querySelector('button').setAttribute('disabled', 'true');
-        } else {
-            li.onclick = () => {
-                document.querySelectorAll('.app__section-task-list-item-active')
-                .forEach(elemento => {
-                    elemento.classList.remove('app__section-task-list-item-active');
-                });
-    
-                if(tarefaSelecionada === tarefa) {
-                    tarefaSelecionada = null;
-                    liDaTarefaSelecionada = null;
-                    taskEmAndamnento.textContent = '';
-                    return;
-                }
-                tarefaSelecionada = tarefa;
-                liDaTarefaSelecionada = li;
-                taskEmAndamnento.textContent = tarefa.descricao;
-                li.classList.add('app__section-task-list-item-active');
+        li.onclick = () => {
+            document.querySelectorAll('.app__section-task-list-item-active')
+            .forEach(elemento => {
+                elemento.classList.remove('app__section-task-list-item-active');
+            });
+
+            if(tarefaSelecionada === tarefa) {
+                tarefaSelecionada = null;
+                liDaTarefaSelecionada = null;
+                taskEmAndamnento.textContent = '';
+                return;
             }
+            tarefaSelecionada = tarefa;
+            liDaTarefaSelecionada = li;
+            taskEmAndamnento.textContent = tarefa.descricao;
+            li.classList.add('app__section-task-list-item-active');
         }
     }
 
@@ -143,27 +128,8 @@
             liDaTarefaSelecionada.classList.remove('app__section-task-list-item-active');
             liDaTarefaSelecionada.classList.add('app__section-task-list-item-complete');
             liDaTarefaSelecionada.querySelector('button').setAttribute('disabled', 'true');
-            tarefaSelecionada.completa = true;
-            atualizaTarefasNoLocalStorage();
         }
     });
 
-    const removerTarefas = (somenteCompletas) => {
-        const seletorDeTarefasConcluidas = somenteCompletas ? '.app__section-task-list-item-complete' : ".app__section-task-list-item";
-        const tarefasConcluidas = document.querySelectorAll(seletorDeTarefasConcluidas);
-        tarefasConcluidas.forEach(tarefa => {
-            tarefa.remove();
-        });
-
-        tarefas = somenteCompletas ? tarefas.filter(tarefa => !tarefa.completa) : [];
-        atualizaTarefasNoLocalStorage();
-    }
-
-    botaoRemoverTasksConcluidas.addEventListener('click', () => {
-        removerTarefas(true);
-    });
-    botaoRemoverTodasTasks.addEventListener('click', () => {
-        removerTarefas(false);
-    });
 
 })();
