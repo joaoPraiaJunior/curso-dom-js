@@ -28,7 +28,7 @@
    const audioDePause = new Audio('./sons/pause.mp3');
    const audioDeFinalizacaoDeTarefa = new Audio('./sons/beep.mp3');
    const duracaoDoFoco = 1500;
-   const duracaoDoDescansoCurto = 300;
+   const duracaoDoDescansoCurto = 3;
    const duracaoDoDescansoLongo = 900;
    
    let tempoDecorridoEmSegundos = duracaoDoFoco;

@@ -27,7 +27,8 @@
    const audioDePlay = new Audio('./sons/play.wav');
    const audioDePause = new Audio('./sons/pause.mp3');
    const audioDeFinalizacaoDeTarefa = new Audio('./sons/beep.mp3');
-   const duracaoDoFoco = 1500;
+   const contextoDaPagina = html.dataset.contexto;
+   const duracaoDoFoco = 5;
    const duracaoDoDescansoCurto = 300;
    const duracaoDoDescansoLongo = 900;
    
@@ -89,7 +90,6 @@
          alert('Acabou o tempo!');
          despachaEventoDeConclusao();
          limpaIntervaloDoTemporizador();
-         alteraTempo(html.dataset.contexto);
          return;
       }
    
@@ -141,7 +141,7 @@
    }
 
    function despachaEventoDeConclusao() {
-      const focoAtivo = html.dataset.contexto === 'foco';
+      const focoAtivo = contextoDaPagina === 'foco';
       if(focoAtivo) {
          const evento = new CustomEvent('FocoConcluido');
          document.dispatchEvent(evento);

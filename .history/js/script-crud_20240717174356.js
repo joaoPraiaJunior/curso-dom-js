@@ -52,10 +52,6 @@
         areaDeTexto.value = '';
     });
 
-    botaoDeletar.addEventListener('click', () => {
-        areaDeTexto.value = '';
-    });
-
     function salvaTarefa(tarefa) {
         const elementoTarefa = criaElementoTarefa(tarefa);
         listaDeTarefas.append(elementoTarefa);

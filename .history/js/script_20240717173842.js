@@ -29,7 +29,7 @@
    const audioDeFinalizacaoDeTarefa = new Audio('./sons/beep.mp3');
    const duracaoDoFoco = 1500;
    const duracaoDoDescansoCurto = 300;
-   const duracaoDoDescansoLongo = 900;
+   const duracaoDoDescansoLongo = 2;
    
    let tempoDecorridoEmSegundos = duracaoDoFoco;
    let intervaloDoTemporizador = null;
